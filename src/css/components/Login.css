@@ -1,0 +1,28 @@
+body{
+    /* text-align: center; */
+}
+
+.loginForm--button
+{
+    background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+}
+
+.evo-input,.evo-password {
+    border:none;
+    border-bottom:1pt solid orange;
+}
+
+.evo-password{
+    width: 100%;
+    box-shadow: none;
+}
+.evo-password > input{
+    border: none;
+    width: 100%;
+    box-shadow: none;
+}
+.evo-password > input:enabled:focus{
+    border: none;
+    width: 100%;
+    box-shadow: none;
+}
