@@ -1,7 +1,14 @@
+html, body {height: 100%}
+
+ 
+  
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI','Frutiger','Frutiger Linotype','Dejavu Sans','Helvetica Neue','Arial',sans-serif; 
-  font-size: 1.5rem;
+    text-align: center;
+    color: RGB(100,100,100);
+    background-color: RGB(255,230,170);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen'; 
+    font-size: 1.5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -9,4 +16,36 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.linkNone{
+  color: inherit;
+  border:none;
+  text-decoration: none;
+  padding-top: 0px;
+}
+
+.stopPointList{
+  border: 1pt solid black;
+  margin: 1rem;
+}
+.stopPointContent{
+  border-bottom: solid 1pt orange;
+}
+
+
+.check_uncheck > img{
+  display: block;
+  margin: 0px auto;
+  width: 100%;
+}
+
+.stopPoint_bt >img{
+  width: 50px;
+}
+
+.productsList{
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
+  margin: 1rem;
 }

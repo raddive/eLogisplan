@@ -1,13 +1,67 @@
+import {React,useContext} from 'react';
+import { BrowserRouter, Routes, Route,Navigate, } from "react-router-dom";
+import { UserDataProvider,UserDataConsumer,UserContext} from "./contexts/userData";
+import { ResourceDataProvider,ResourceDataConsumer,ResourceContext} from "./contexts/resourceData";
+
 import Landing from './pages/Landing';
+import Plan from './pages/Plan';
+import Viaje from './pages/Viaje';
+import Servicio from './pages/Servicio';
+import ServicioWarning from './pages/ServicioWarning';
+import NoPage from './pages/NoPage';
 
 function App() {
+
+  
+
+  const ProtectedRoute = ({ children }) => {
+    const userData = useContext(UserContext).userData;
+    if (userData.name==="") {
+      return <Navigate to="/" replace />;
+    }
+    return children;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Landing />
-      </header>
-    </div>
+    <BrowserRouter>
+      <UserDataProvider>
+      <ResourceDataProvider>
+        <Routes>
+          <Route path="/" element={<Landing/>} />
+          <Route path="/plan" element={
+              <UserDataConsumer>
+                {user => (
+                    <ProtectedRoute>
+                      <Plan />
+                    </ProtectedRoute>
+                )}
+            </UserDataConsumer>
+          }/>
+          <Route path="/viaje" element={
+              <UserDataConsumer>
+                {user =>
+                    <ProtectedRoute>
+                      <Viaje />
+                    </ProtectedRoute>
+                }
+              </UserDataConsumer>
+            }/>
+          <Route path="/servicio" element={
+              <ProtectedRoute>
+                <Servicio />
+              </ProtectedRoute>
+            }/>
+            <Route path="/warning" element={
+              <ProtectedRoute>
+                <ServicioWarning />
+              </ProtectedRoute>
+            }/>
+          <Route path="/login" element={<Landing/>} />
+          <Route path="/*" element={<NoPage />} />
+        </Routes>
+      </ResourceDataProvider>
+      </UserDataProvider>
+    </BrowserRouter>
   );
 }
-
 export default App;
