@@ -5,6 +5,9 @@ import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
 import PagesHeader from '../components/PagesHeader';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { callWS, HHMM_to_String } from "../components/utils";
+import { Image } from 'primereact/image';
+
+import img_bt_uncheck from "../images/img_bt_uncheck.png"
 
 export default function ServicioWarning (props) { 
    const location = useLocation();
@@ -40,14 +43,12 @@ export default function ServicioWarning (props) {
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen">
-                  <div className="col-7 hidden max-h-screen
-                                 lg:flex">
-                     <img className="w-full pl-5" src="./images/imgLandingLeft.png" alt="CityNight" />
+               <div className="grid max-w-screen ml-0">
+                  <div className="col-5 col-offset-1 hidden max-h-screen lg:flex">
+                  <Image className="flex align-content-start justify-content-center flex-wrap p-5" imageStyle={{width:"100%", height:"auto"}} src="./images/imgLandingLeft.png" alt="CityNight" />
                   </div>
-                  <div className="col-12
-                           lg:col-5 lg:col-offset-0">
-                     <div className='m-4 bg-white h-full text-left pb-3'>
+                  <div className="col-12 lg:col-5 lg:col-offset-0">
+                     <div className='m-5 bg-white h-full text-left pb-3'>
                         <PagesHeader
                            logOut={userContext.logOut}
                            infoUser={null}
@@ -57,6 +58,9 @@ export default function ServicioWarning (props) {
                         <p className="text-3xl text-red-500">{error}</p>
                         {infoServicio && (
                            <span className='stopPointList grid p-3 m-3 '>
+                              <div className="col-3 text-left"> 
+                                 <Image className='stopPoint_bt' src={img_bt_uncheck} alt="LogoEvolution" />
+                              </div>
                               <span className='col-12 bg-orange-100'>
                                  <span>#Servicio : {numServicio} ({numParticion})</span><br/>
                                  <span>{infoServicio.NombreDestino}</span><br/>

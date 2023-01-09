@@ -9,6 +9,7 @@ import Viaje from './pages/Viaje';
 import Servicio from './pages/Servicio';
 import ServicioWarning from './pages/ServicioWarning';
 import NoPage from './pages/NoPage';
+import Map from './pages/Map';
 
 function App() {
 
@@ -53,11 +54,12 @@ function App() {
             }/>
             <Route path="/warning" element={
               <ProtectedRoute>
-                <ServicioWarning />
+                <Servicio warning={true} />
               </ProtectedRoute>
             }/>
           <Route path="/login" element={<Landing/>} />
           <Route path="/*" element={<NoPage />} />
+          <Route path="/map" element={<Map/>} />
         </Routes>
       </ResourceDataProvider>
       </UserDataProvider>

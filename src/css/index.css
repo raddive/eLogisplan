@@ -49,3 +49,7 @@ code {
   border-bottom: 1pt solid black;
   margin: 1rem;
 }
+
+#map{
+  height: 180px;
+}

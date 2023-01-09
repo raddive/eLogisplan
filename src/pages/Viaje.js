@@ -6,36 +6,54 @@ import PagesHeader from '../components/PagesHeader';
 import { callWS } from "../components/utils";
 import StopPointItem from '../components/StopPointItem';
 import LoadPointItem from '../components/LoadPointItem';
+import MyMapContainer from '../components/MyMapContainer';
 
 export default function Viaje (props) { 
  const location = useLocation();
- let { from,numViaje } = location.state;
- from="/"+from;
+//  let { from,numViaje } = location.state;
+// from="/"+from;
+ let { numViaje } = location.state;
 
  const userContext = React.useContext(UserContext);
  const resourceContext = React.useContext(ResourceContext);
  const [error,setError] = useState("");
- const [stopPoints,setStopPoints] = useState([]);
+ const [basePointInfo,setBasePointInfo] =useState({nombre:"BASE1",lat:42.46316,long:-3.85132});
  const [loadPointInfo,setLoadPointInfo] =useState();
- const [stopPointList,setStopPointList] =useState();
+ const [stopPoints,setStopPoints] = useState([]);
+ const [stopPointList,setStopPointList] =useState([]);
+ const [coordList,setCoordList] =useState([]);
+ const [toggle, setToggle] = useState(false);
  
  useEffect( () => {
    getInfoViaje();
  },[]);
 
+ useEffect(() => {
+   getInfoViaje();
+}, [toggle,props])
+
  useEffect( () => {
-      setLoadPointInfo(stopPoints[0]);
-      const auxStopPointList = stopPoints.map((item,index) => {
-         return (
-               <StopPointItem key={index}
-                  info={item}
-               />
-         )
-      })
-      setStopPointList(auxStopPointList);
+      if(Array.isArray(stopPoints) && stopPoints.length!==0)
+      {
+         setLoadPointInfo(stopPoints[0]);
+         let points=[];
+         const auxStopPointList = stopPoints.map((item,index) => {
+            points.push([item.Descarga_Coord_Latitude,item.Descarga_Coord_Longitude]);
+            return (
+                  <StopPointItem key={index}
+                     info={item}
+                     refreshData={refreshData}
+                  />
+            )
+         })
+         setStopPointList(auxStopPointList);
+         setCoordList(points);
+      }
  },[stopPoints]);
 
-
+ function refreshData(){
+   setToggle(prev => !prev);
+ }
 
  function getInfoViaje()
     {
@@ -52,6 +70,7 @@ export default function Viaje (props) {
          .then(data =>   { 
                setError("");
                setStopPoints(data);
+               setToggle(prev => !prev);
                return;
          })
          .catch((error) => {
@@ -60,27 +79,29 @@ export default function Viaje (props) {
       }    
     }
 
-
  return (
    <UserDataConsumer>
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen">
-                  <div className="col-7 hidden max-h-screen
-                                 lg:flex">
-                     <img className="w-full pl-5" src="./images/imgLandingLeft.png" alt="CityNight" />
+               <div className="grid max-w-screen ml-0">
+                  <div className="col-5 col-offset-1 hidden  lg:flex">
+                     {Array.isArray(coordList) && coordList.length!==0 &&
+                     (
+                        <MyMapContainer 
+                           markerList = {coordList}
+                           basePoint = {basePointInfo} 
+                           loadPoint = {loadPointInfo}/>
+                     )}
                   </div>
                   <div className="col-12
                            lg:col-5 lg:col-offset-0">
-                     <div className='m-4 bg-white h-full text-left pb-3'>
+                     <div className='m-5 bg-white h-full text-left pb-3'>
                         {stopPoints[0] && (
                            <PagesHeader
                               logOut={userContext.logOut}
                               infoUser={userContext.userData}
                               infoResource={resourceContext.resourceData}
-                              inicio={stopPoints[0].HoraInicioViaje}
-                              fin={stopPoints[0].HoraFinViaje}
                            />
                         )}
                         <p className="text-3xl text-red-500">{error}</p>
@@ -88,7 +109,9 @@ export default function Viaje (props) {
                         {loadPointInfo && (
                            <div className='stopPointList'>
                               <LoadPointItem 
-                                 info={loadPointInfo}/>
+                                 info={loadPointInfo}
+                                 refreshData={refreshData}
+                                 infoResource={resourceContext.resourceData}/>
                            </div>
                         )}
                         {stopPointList && (

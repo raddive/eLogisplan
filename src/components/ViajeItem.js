@@ -22,23 +22,27 @@ export default function ViajeItem (props) {
         
     }
 
+    let  estadoStyle ='col-3 text-left text-base'
+    if(props.infoViaje.Estado==='Cargado')
+        estadoStyle+=' text-orange-500';
+    else if(props.infoViaje.Estado==='Finalizado')
+        estadoStyle+=' text-green-500';
  return (
     <Link to="/viaje" state={{ from: "plan", numViaje: props.infoViaje.Viaje}} className='linkNone'>
-
-    <div className='grid stopPointList m-3 p-2'>
-        <div className="col-3 text-left"> 
-            <Image imageClassName="evo-nav--logo-small" src={tripImg} alt="LogoEvolution" />
+        <div className='grid stopPointList m-3 p-2'>
+            <div className="col-3 text-left"> 
+                <Image imageClassName="evo-nav--logo-small" src={tripImg} alt="LogoEvolution" />
+            </div>
+            <div className="col-6 text-left"> 
+                <span className='text-2xl text-left'>
+                    Viaje: {props.infoViaje.Viaje}
+                    <br></br>
+                    <span className='text-left'>{HHMM_to_String(props.infoViaje.HoraInicioViaje)} - {HHMM_to_String(props.infoViaje.HoraFinViaje)}</span>
+                </span>
+            </div>
+            <div className={estadoStyle}> 
+                {props.infoViaje.Estado}
+            </div>
         </div>
-        <div className="col-6 text-left"> 
-            <span className='text-2xl text-left'>
-                Viaje: {props.infoViaje.Viaje}
-                <br></br>
-                <span className='text-left'>{HHMM_to_String(props.infoViaje.HoraInicioViaje)} - {HHMM_to_String(props.infoViaje.HoraFinViaje)}</span>
-            </span>
-        </div>
-        <div className="col-3 text-left text-base"> 
-            {props.infoViaje.Estado}
-        </div>
-  </div>
     </Link>
 );};

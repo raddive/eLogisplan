@@ -37,6 +37,51 @@ export function callWS(type,params,sError)
     })
 };
 
+export function chechUncheckStopPoint(error,setUnset,pedido,particion)
+{
+    const formatDate = Moment().format('YYYY-MM-DD')
+    let  params;
+    if(setUnset == false)
+        params = { rquest:"confirmaPedido",body:{unset:1,fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:"Distribucion"}};
+    else
+        params = { rquest:"confirmaPedido",body:{fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:"Distribucion"}};
+
+    callWS("POST",params,error)
+    .then(data =>   { 
+        //console.log(data);
+        return true;
+    })
+    .catch((error) => {
+        return false;
+    });
+
+
+}
+// 		    if(isset($inputArray->fecha) AND isset($inputArray->codigoConductor) AND isset($inputArray->codigoTractora) AND isset($inputArray->codigoCisterna) AND isset($inputArray->viaje) AND isset($inputArray->empresa)){
+
+export function chechUncheckLoadPoint(error,setUnset,conductor,tractora,cisterna,viaje)
+{
+
+    const formatDate = Moment().format('YYYY-MM-DD')
+    let  params;
+    if(setUnset == false)
+        params = { rquest:"confirmaCarga",body:{unset:1,fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:"Distribucion"}};
+        else
+           params = { rquest:"confirmaCarga",body:{fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:"Distribucion"}};
+
+    callWS("POST",params,error)
+    .then(data =>   { 
+        //console.log(data);
+        return true;
+    })
+    .catch((error) => {
+        return false;
+    });
+
+
+}
+
+
 export function updateBBDD(error)
 {
     const formatDate = Moment().format('DD-MM-YYYY')

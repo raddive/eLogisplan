@@ -1,6 +1,8 @@
 import React, { useEffect,useState } from 'react';
 import { UserDataConsumer,UserContext } from "../contexts/userData";
 import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
+import { Image } from 'primereact/image';
+
 
 import ViajeItem from '../components/ViajeItem';
 import PagesHeader from '../components/PagesHeader';
@@ -86,27 +88,22 @@ export default function Plan (props) {
       }    
     }
    
-
  return (
    <UserDataConsumer>
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen">
-                  <div className="col-7 hidden max-h-screen
-                                 lg:flex">
-                     <img className="w-full pl-5" src="./images/imgLandingLeft.png" alt="CityNight" />
+               <div className="grid max-w-screen ml-0 ">
+                  <div className="col-5 col-offset-1 hidden lg:flex">
+                     <Image className="flex align-content-start justify-content-center flex-wrap p-5" imageStyle={{width:"100%", height:"auto"}} src="./images/imgLandingLeft.png" alt="CityNight" />
                   </div>
-                  <div className="col-12 
-                            lg:col-5 lg:col-offset-0">
-                     <div className='m-4 bg-white h-full pb-3'>
+                  <div className="col-12 lg:col-5 lg:col-offset-0">
+                     <div className='m-5 bg-white max-h-screen pb-3'>
                         {viajesRecurso[0] && (
                            <PagesHeader
                               logOut={userContext.logOut}
                               infoUser={userContext.userData}
                               infoResource={resourceContext.resourceData}
-                              inicio={viajesRecurso[0].HoraInicioViaje}
-                              fin={viajesRecurso[0].HoraFinViaje}
                               />
                         )}
                         <p className="text-3xl text-red-500">{error}</p>

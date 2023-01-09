@@ -21,7 +21,7 @@ export default function PagesHeader (props) {
         <div className="col-8 text-right"> 
             <span className='underline text-orange-500' onClick={handlerClick}>Salir</span>
         </div>
-        {props.infoUser && (
+        {props.infoUser && props.infoResource && (
             <>
                 <span className='col-12 text-right'>{props.infoUser.date}</span>
                 <div className='text-left border-solid m-3 p-2 w-full'>
@@ -29,7 +29,7 @@ export default function PagesHeader (props) {
                     <span className='text-2xl text-left'>
                         {props.infoUser.name} ({props.infoUser.code})
                         <br></br>
-                        <span className='text-left'>Inicio - Fin : {HHMM_to_String(props.inicio)} - {HHMM_to_String(props.fin)}</span>
+                        <span className='text-left'>Inicio - Fin : {HHMM_to_String(props.infoResource.horaInicio)} - {HHMM_to_String(props.infoResource.horaFin)}</span>
                     </span>
                 </div>
             </>
