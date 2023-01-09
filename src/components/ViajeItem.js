@@ -22,14 +22,26 @@ export default function ViajeItem (props) {
         
     }
 
-    let  estadoStyle ='col-3 text-left text-base'
-    if(props.infoViaje.Estado==='Cargado')
+    let  estadoStyle ='col-3 text-left text-base';
+    let  viajeStyle ='grid stopPointList m-3 p-2';
+    if(props.infoViaje.Estado==='Cargado text-xl')
+    {
         estadoStyle+=' text-orange-500';
+    }
     else if(props.infoViaje.Estado==='Finalizado')
-        estadoStyle+=' text-green-500';
+    {
+        estadoStyle+=' text-green-500 text-2xl';
+        viajeStyle+= ' bg-green-100';
+    }
+    else if(props.infoViaje.Estado==='Por empezar')
+    {
+        estadoStyle+=' text-gray-500';
+        viajeStyle+= ' bg-gray-100';
+    }
+
  return (
     <Link to="/viaje" state={{ from: "plan", numViaje: props.infoViaje.Viaje}} className='linkNone'>
-        <div className='grid stopPointList m-3 p-2'>
+        <div className={viajeStyle}>
             <div className="col-3 text-left"> 
                 <Image imageClassName="evo-nav--logo-small" src={tripImg} alt="LogoEvolution" />
             </div>

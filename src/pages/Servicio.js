@@ -9,7 +9,6 @@ import MyMapContainer from '../components/MyMapContainer';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { empresa } from "../variables/webServicesVariables";
 
 import img_bt_uncheck from "../images/img_bt_uncheck.png"
 import img_bt_check from "../images/img_bt_check.png"
@@ -94,7 +93,7 @@ export default function Servicio (props) {
                            fecha: userContext.userData.date, 
                            codigoServicio:numServicio,
                            particion:numParticion,
-                           empresa:empresa};
+                           empresa:userContext.userData.empresa};
          callWS("GET",params,error)
          .then(data =>   { 
                setError("");
