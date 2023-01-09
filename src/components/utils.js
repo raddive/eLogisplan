@@ -1,5 +1,5 @@
 import Moment from 'moment';
-import { wsBaseURL } from "../variables/webServicesVariables";
+import { wsBaseURL,empresa } from "../variables/webServicesVariables";
 
 export function callWS(type,params,sError)
 {
@@ -42,9 +42,9 @@ export function chechUncheckStopPoint(error,setUnset,pedido,particion)
     const formatDate = Moment().format('YYYY-MM-DD')
     let  params;
     if(setUnset == false)
-        params = { rquest:"confirmaPedido",body:{unset:1,fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:"Distribucion"}};
+        params = { rquest:"confirmaPedido",body:{unset:1,fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:empresa}};
     else
-        params = { rquest:"confirmaPedido",body:{fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:"Distribucion"}};
+        params = { rquest:"confirmaPedido",body:{fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:empresa}};
 
     callWS("POST",params,error)
     .then(data =>   { 
@@ -85,7 +85,7 @@ export function chechUncheckLoadPoint(error,setUnset,conductor,tractora,cisterna
 export function updateBBDD(error)
 {
     const formatDate = Moment().format('DD-MM-YYYY')
-    const params = { rquest:"actualizaBBDD",body:{fecha:formatDate,empresa:"Distribucion"}};
+    const params = { rquest:"actualizaBBDD",body:{fecha:formatDate,empresa:empresa}};
     callWS("POST",params,error)
     .then(data =>   { 
         //console.log(data);

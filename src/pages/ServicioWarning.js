@@ -25,7 +25,7 @@ export default function ServicioWarning (props) {
                         body:{fecha: userContext.userData.date, 
                               codigoServicio:numServicio,
                               particion:numParticion,
-                              empresa:"Distribucion",
+                              empresa:userContext.userData.empresa,
                               incidencia:warning}
                      };
       callWS("POST",params,error)

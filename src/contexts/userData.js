@@ -1,5 +1,7 @@
 import React,{useState} from "react"
 import {Navigate } from "react-router-dom";
+import { empresa } from "../variables/webServicesVariables";
+
 
 const {Consumer} = React.createContext()
 const UserContext = React.createContext(undefined);
@@ -9,7 +11,7 @@ function UserDataProvider(props) {
     const [userData, setUserData] = useState({code:"",name:"",date:""});
     function setUser(newUser,curDate)
     {
-        setUserData({ code: newUser.CodigoConductor,name: newUser.NombreConductor,date:curDate});
+        setUserData({ code: newUser.CodigoConductor,name: newUser.NombreConductor,date:curDate,empresa:empresa});
     };
     function checkUser(userData,password)
     {

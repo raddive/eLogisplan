@@ -65,7 +65,7 @@ export default function Viaje (props) {
                            codigoTractora:resourceContext.resourceData.tractora,
                            codigoCisterna:resourceContext.resourceData.cisterna,
                            viaje: numViaje,
-                           empresa:"Distribucion"};
+                           empresa:userContext.userData.empresa};
          callWS("GET",params,error)
          .then(data =>   { 
                setError("");

@@ -8,6 +8,7 @@ import '../css/pages/Login.css';
 
 import { UserDataConsumer, UserContext } from "../contexts/userData";
 import { callWS,updateBBDD } from "../components/utils";
+import { empresa } from "../variables/webServicesVariables";
 
 export default function Login (props) 
 { 
@@ -40,12 +41,10 @@ function loginClick () {
 
     if(formData.user && formData.password)
     {
-        const params = { rquest:"mobileLogin",user:formData.user,empresa:"Distribucion"};
-        //const params = { rquest:"mobileLogin",user:"COND8",empresa:"Distribucion"};
+        const params = { rquest:"mobileLogin",user:formData.user,empresa:empresa};
         callWS("GET",params,error)
         .then(data =>   { 
             if(userContext.checkUser(data,formData.password))
-            //if(userContext.checkUser(data,"CONDUCTOR8"))
             {
                 setError("");
                 const formatDate = Moment().format('DD-MM-YYYY')

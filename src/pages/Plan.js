@@ -52,7 +52,7 @@ export default function Plan (props) {
     {
       if(userContext.userData.code)
       {
-         const params = { rquest:"getDatosRecurso",codigoConductor:userContext.userData.code,empresa:"Distribucion"};
+         const params = { rquest:"getDatosRecurso",codigoConductor:userContext.userData.code,empresa:userContext.userData.empresa};
          callWS("GET",params,error)
          .then(data =>   { 
                setError("");
@@ -75,7 +75,7 @@ export default function Plan (props) {
                            codigoConductor:resourceContext.resourceData.conductor,
                            codigoTractora:resourceContext.resourceData.tractora,
                            codigoCisterna:resourceContext.resourceData.cisterna,
-                           empresa:"Distribucion"};
+                           empresa:userContext.userData.empresa};
          callWS("GET",params,error)
          .then(data =>   { 
                setError("");
