@@ -19,12 +19,23 @@ import img_bt_map from "../images/img_bt_map.png"
 export default function Servicio (props) { 
    const location = useLocation();
    const navigate = useNavigate();
-   let { numServicio,numParticion } = location.state;
+
+   let numServicio,numParticion;
+   if(location.state){
+      numServicio=location.state.numServicio
+      numParticion = location.state.numParticion;
+   }
+   else
+   {
+      numServicio=props.numServicio
+      numParticion = props.numParticion;
+   }
   
    const userContext = React.useContext(UserContext);
    const [infoServicio,setInfoServicio] =useState();
    const [checked,setChecked] = useState(false);
    const [checkedImage,setCheckedImage] = useState(img_bt_check);
+   const [viewWarning,setViewWarning]=useState(props.warning);
    const [warning,setWarning]=useState("");
    const [error,setError] = useState("");
 
@@ -45,7 +56,7 @@ export default function Servicio (props) {
    useEffect(() => {
        setCheckedImage(checked?img_bt_check:img_bt_uncheck);
        getInfoServicio();
-   },[checked]);
+   },[checked,viewWarning]);
 
 
    const showConfirm = () => {
@@ -106,6 +117,10 @@ export default function Servicio (props) {
       }    
     }
 
+    function onViewWarning()
+    {
+      setViewWarning(true);
+    }
 
     function addWarning(){
       if(warning!=="")
@@ -120,15 +135,20 @@ export default function Servicio (props) {
          callWS("POST",params,error)
          .then(data =>   { 
                setError("");
-               return navigate(-1);
+               setViewWarning(false);
          })
          .catch((error) => {
             setError(error.message);
          });
       }
       else
-         return navigate(-1);
+      {
+         setViewWarning(false);
+         return;
+      }
    };
+
+   const textColor=(infoServicio && infoServicio.HoraDestinoSalida<infoServicio.HoraRealDestino)?"text-red-500 text-xl":"text-green-700 text-xl";
 
    return (
    <UserDataConsumer>
@@ -158,11 +178,12 @@ export default function Servicio (props) {
                               <div className="col-5 text-left flex align-items-center"> 
                                  <Toast ref={toastBC} position="top-center" />
                                  <Image onClick={showConfirm} className='stopPoint_bt' src={checkedImage} alt="LogoEvolution" />
-                                 {checked===true && infoServicio.HoraRealDestino!=="" && (<span className='text-green-700 text-xl'>{HHMM_to_String(infoServicio.HoraRealDestino)}</span>)}
+                                 {checked===true && infoServicio.HoraRealDestino!=="" && (<span className={textColor}>{HHMM_to_String(infoServicio.HoraRealDestino)}</span>)}
                               </div>
 
                               <div className="col-7 text-right"> 
-                              <Link to="/warning" state={{ from: "viaje",Servicio:infoServicio,numServicio:numServicio,numParticion:numParticion}}><Image className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" /></Link>
+                              {/* <Link to="/warning" state={{ from: "viaje",Servicio:infoServicio,numServicio:numServicio,numParticion:numParticion}}><Image className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" /></Link> */}
+                              <Image onClick={onViewWarning} className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" />
                               <a href={"https://maps.google.com/?q="+infoServicio.Descarga_Coord_Latitude+","+infoServicio.Descarga_Coord_Longitude} target="_blank"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
                               </div>
                               <span className='col-12 bg-orange-100'>
@@ -183,7 +204,7 @@ export default function Servicio (props) {
                                  </span>
                                  <span >Observaciones : <br/>{infoServicio.Observaciones1}</span><br/>
                                  <span >Incidencias : <br/><span dangerouslySetInnerHTML={{__html: infoServicio.Observaciones2}}></span></span><br/>
-                                 {props.warning===true && (
+                                 {viewWarning===true && (
                                     <>
                                        <span className='text-base'>Nueva incidencia</span><br/>
                                        <InputTextarea rows={7} cols={55} onChange={(e) => setWarning(e.target.value)} ></InputTextarea>

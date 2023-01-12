@@ -4,6 +4,11 @@ import { MapContainer, TileLayer, Marker,Polyline,FeatureGroup,useMap,LayerGroup
 import { useMapEvents } from 'react-leaflet/hooks'
 
 
+import img_mark_green from "../images/marker_green.png"
+import img_mark_blue from "../images/marker_blue.png"
+import img_mark_orange from "../images/marker_orange.png"
+import img_mark_shadow from "../images/marker_shadow.png"
+
 function SetBounds(props) {
     const [limits, setLimits] = useState();
     const [center, setCenter] = useState();
@@ -17,11 +22,11 @@ function SetBounds(props) {
     };
 
     function CenterMap() {
-        setLimits(props.markers);
+        setLimits(props.markers && props.basePoint===null && props.loadPoint===null);
         if(props.markers.length===1)
             map.fitBounds(props.markers,{ padding: [10,10], maxZoom:17});
         else
-            map.fitBounds(props.markers,{ padding: [10,10]});
+            map.fitBounds(props.markers,{ padding: [50,50]});
         setCenter(map.getCenter());
     }
 
@@ -63,7 +68,7 @@ export default function MyMapContainer(props) {
             setPolyline(prev => [...prev,aux])
 
         }
-        if(props.markerList && props.markerList.length>1)
+        if(props.markerList && props.markerList.length>=1)
         {
             props.markerList.map(item => {
                 const aux=[item[0],item[1]];
@@ -73,34 +78,23 @@ export default function MyMapContainer(props) {
     },[]);
 
 
-    const iconGreen = L.icon({
-        iconUrl: '/images/marker_green.png',
-        iconSize: [38, 66],
-        iconAnchor: [19, 66],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'images/marker_shadow.png',
-        shadowSize: [40, 50],
-        shadowAnchor: [0, 50]
+
+    var MyIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 55],
+            iconAnchor: [16, 55],
+            popupAnchor: [-3, -76],
+            shadowUrl: img_mark_shadow,
+            shadowSize: [30, 45],
+            shadowAnchor: [0, 45]
+        }
     });
-    const iconBlue = L.icon({
-        iconUrl: '/images/marker_blue.png',
-        iconSize: [38, 66],
-        iconAnchor: [19, 66],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'images/marker_shadow.png',
-        shadowSize: [40, 50],
-        shadowAnchor: [0, 50]
-    });
-    const iconOrange = L.icon({
-        iconUrl: '/images/marker_orange.png',
-        iconSize: [38, 66],
-        iconAnchor: [19, 66],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'images/marker_shadow.png',
-        shadowSize: [40, 50],
-        shadowAnchor: [0, 50]
-    });
-  return (
+
+    const iconGreen = new MyIcon({iconUrl: img_mark_green});
+    const iconBlue = new MyIcon({iconUrl: img_mark_blue});
+    const iconOrange = new MyIcon({iconUrl: img_mark_orange});
+
+    return (
     <>
     
     <MapContainer

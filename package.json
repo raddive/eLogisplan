@@ -6,6 +6,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.3",
     "moment": "^2.29.4",
     "primeflex": "^3.3.0",
@@ -41,6 +44,8 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
+      
+    ],
+    "homepage": "http://app.logisplan.com/react/"
   }
 }

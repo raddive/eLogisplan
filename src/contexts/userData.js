@@ -1,30 +1,89 @@
 import React,{useState} from "react"
 import {Navigate } from "react-router-dom";
 import { empresa } from "../variables/webServicesVariables";
+import jwt_decode from "jwt-decode";
+import bcrypt from "bcryptjs"
+import { callWS} from "../components/utils";
+import AdminLanding from "../pages/AdminLanding";
 
 
 const {Consumer} = React.createContext()
 const UserContext = React.createContext(undefined);
 
+
 function UserDataProvider(props) {
 
-    const [userData, setUserData] = useState({code:"",name:"",date:""});
+    const [userData, setUserData] = useState({code:"",name:"",date:"",empresa:""});
+    const [adminData, setAdminData] = useState({name:""});
+    const [isAdmin, setIsAdmin] = useState(false);
     function setUser(newUser,curDate)
     {
-        setUserData({ code: newUser.CodigoConductor,name: newUser.NombreConductor,date:curDate,empresa:empresa});
+        setUserData({ code: newUser.code,name: newUser.name,date:curDate,empresa:empresa});
+        setIsAdmin(false);
     };
-    function checkUser(userData,password)
+    function setAdmin(name)
     {
-        if(userData.NombreConductor===password)
-            return true;
-        else
-            return false;
-        
+        setAdminData({ name: name});
+        setIsAdmin(true);
     };
+
+
+    function checkUser(userCode)
+    {
+        let error="";
+        const params = { rquest:"loginJWT",user:userCode,empresa:empresa};
+        callWS("GET",params,error)
+        .then(data =>   { 
+            if(data)
+            {
+                console.log(data);
+                return true;
+            }
+            else
+                return false;
+        })
+        .catch((error) => {
+            console.log(error);
+            return false;
+         });
+    }
+
+
+    function registerJWTUser(formData)
+    {
+        // SALT should be created ONE TIME upon sign up
+        const salt = bcrypt.genSaltSync(10)
+        console.log(salt);
+    
+        const hashedPassword = bcrypt.hashSync(formData.password, salt) // hash created previously created upon sign up
+
+        console.log(hashedPassword );
+    }
+
+    function checkJWTLogin(userData,password)
+    {
+        const match = bcrypt.compareSync(password, userData.password);
+        if(!match) 
+            return false;
+        else
+            return true;;
+    };
+
+    // function checkUser(userData,password)
+    // {
+    //     if(userData.NombreConductor===password)
+    //         return true;
+    //     else
+    //         return false;
+        
+    // };
     function logOut()
     {
         setUserData({code:"",name:""})
-        return <Navigate to='/' />
+    }
+    function adminLogOut()
+    {
+        setAdminData({name:""})
     }
     
     // return (
@@ -35,9 +94,11 @@ function UserDataProvider(props) {
     //     </UserContext.Provider>    
     // )
     return (
-        <UserContext.Provider value={{userData,setUser,checkUser,logOut}}>
-              {props.children}
-        </UserContext.Provider>    
+        <>
+            <UserContext.Provider value={{userData,adminData,isAdmin, setUser,setAdmin,checkJWTLogin, checkUser,registerJWTUser,logOut,adminLogOut}}>
+                    {props.children}
+            </UserContext.Provider>    
+        </>
     )
 }
 

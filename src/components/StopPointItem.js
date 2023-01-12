@@ -77,7 +77,7 @@ export default function StopPointItem (props) {
     }
 
 
-    const textColor=stopPointInfo.HoraDestino<stopPointInfo.HoraRealDestino?"text-red-500 text-xl":"text-green-700 text-xl";
+    const textColor=stopPointInfo.HoraDestinoSalida<stopPointInfo.HoraRealDestino?"text-red-500 text-xl":"text-green-700 text-xl";
 
  return (
      <div className='grid m-0'>

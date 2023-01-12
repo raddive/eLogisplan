@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Navigate,Link } from "react-router-dom";
 import { Image } from 'primereact/image';
 import { HHMM_to_String } from './utils';
@@ -9,34 +9,34 @@ import img_end from "../images/img_trip_end.png"
 
 export default function ViajeItem (props) { 
 
-    let img = img_trip;
-    if(props.infoViaje.Estado==="Por empezar")
-        img=img_start;
-    else if(props.infoViaje.Estado==="Finalizado")
-        img=img_end;
-    const [tripImg,setTripImage] = useState(img);
+    const [tripImg,setTripImage] = useState();
+    const [viajeStyle,setViajeStyle] = useState("grid stopPointList m-3 p-2");
+    const [estadoStyle,setEstadoStyle] = useState("col-3 text-left text-base");
 
+    useEffect(() => {
+        calculaEstilos();
+    }, []);
 
-    function handlerClick()
+    function calculaEstilos()
     {
-        
-    }
+        setTripImage(img_trip);
 
-    let  estadoStyle ='col-3 text-left text-base';
-    let  viajeStyle ='grid stopPointList m-3 p-2';
-    if(props.infoViaje.Estado==='Cargado text-xl')
-    {
-        estadoStyle+=' text-orange-500';
-    }
-    else if(props.infoViaje.Estado==='Finalizado')
-    {
-        estadoStyle+=' text-green-500 text-2xl';
-        viajeStyle+= ' bg-green-100';
-    }
-    else if(props.infoViaje.Estado==='Por empezar')
-    {
-        estadoStyle+=' text-gray-500';
-        viajeStyle+= ' bg-gray-100';
+        if(props.infoViaje.Estado==='Cargado text-xl')
+        {
+            setEstadoStyle(prev => prev +" p-2 text-orange-500");
+        }
+        else if(props.infoViaje.Estado==='Finalizado')
+        {
+            setTripImage(img_end);
+            setEstadoStyle(prev => prev + ' text-green-500 text-2xl');
+            setViajeStyle(prev => prev + ' bg-green-100');
+        }
+        else if(props.infoViaje.Estado==='Por empezar')
+        {
+            setTripImage(img_start);
+            setEstadoStyle(prev => prev + ' text-gray-500');
+            setViajeStyle(prev => prev + ' bg-gray-100');
+        }
     }
 
  return (

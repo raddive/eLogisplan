@@ -1,5 +1,9 @@
 import React from 'react';
 import { Image } from 'primereact/image';
+import { Button } from 'primereact/button';
+import img_logoEvolution from "../images/logoEvolution.png"
+import img_logoLogisplan from "../images/logoLogisplan.png"
+
 import { HHMM_to_String } from './utils';
 
 
@@ -14,12 +18,13 @@ export default function PagesHeader (props) {
     <div className="grid m-0">
         <div className="col-4 text-left"> 
             <div className="grid">
-                <Image className="col-6" imageClassName="evo-nav--logo-small" src="./images/logoEvolution.png" alt="LogoEvolution" />
-                <Image className="col-6 text-left" imageClassName="evo-nav--logo-small" src="./images/logoLogisplan.png" alt="LogoLogisplan" />
+                <Image className="col-6" imageClassName="evo-nav--logo-small" src={img_logoEvolution} alt="LogoEvolution" />
+                <Image className="col-6 text-left" imageClassName="evo-nav--logo-small" src={img_logoLogisplan} alt="LogoLogisplan" />
             </div>
         </div>
         <div className="col-8 text-right"> 
-            <span className='underline text-orange-500' onClick={handlerClick}>Salir</span>
+            <Button onClick={handlerClick} label="Salir" icon="pi pi-power-off"/>
+            {/* <span className='underline text-orange-500' onClick={handlerClick}>Salir</span> */}
         </div>
         {props.infoUser && props.infoResource && (
             <>

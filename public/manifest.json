@@ -8,9 +8,9 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logoLogisplan.png",
+      "src": "./images/logoLogisplan.png",
       "type": "image/png",
-      "sizes": "64x64"
+      "sizes": "64x64 192x192 512x512"
     }
   ],
   "start_url": ".",

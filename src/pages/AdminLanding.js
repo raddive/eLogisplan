@@ -2,10 +2,11 @@ import React from "react";
 import { Image } from 'primereact/image';
 import img_Landing from "../images/img_Landing.png"
 
-import Header from "../components/Header";
-import Login from "../pages/Login";
 
-export default function Landing () 
+import Header from "../components/Header";
+import AdminLogin from "./AdminLogin";
+
+export default function AdminLanding () 
 { 
     return (
         <div className="grid max-w-screen ml-0">
@@ -14,7 +15,7 @@ export default function Landing ()
             </div>
             <div className="col-11 col-offset-1 m-5 lg:col-5 lg:col-offset-0">
                 <Header />
-                <Login />
+                <AdminLogin />
             </div>
         </div>
     );

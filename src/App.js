@@ -7,20 +7,28 @@ import Landing from './pages/Landing';
 import Plan from './pages/Plan';
 import Viaje from './pages/Viaje';
 import Servicio from './pages/Servicio';
-import ServicioWarning from './pages/ServicioWarning';
 import NoPage from './pages/NoPage';
 import Map from './pages/Map';
+import AdminLanding from './pages/AdminLanding';
+import AdminPlan from './pages/AdminPlan';
 
 function App() {
-
   
-
   const ProtectedRoute = ({ children }) => {
     const userData = useContext(UserContext).userData;
-    if (userData.name==="") {
+    const adminData = useContext(UserContext).adminData;
+    const isAdmin = useContext(UserContext).isAdmin;
+    console.log(adminData);
+    console.log(userData);
+    if (userData.name!=="" || adminData.name!=="" ) {
+      return children      
+    }
+    else if (isAdmin===false) {
       return <Navigate to="/" replace />;
     }
-    return children;
+    else if (isAdmin===true) {
+      return <Navigate to="/admin" replace />;
+    }
   };
 
   return (
@@ -52,14 +60,14 @@ function App() {
                 <Servicio />
               </ProtectedRoute>
             }/>
-            <Route path="/warning" element={
+          <Route path="/adminPlan" element={
               <ProtectedRoute>
-                <Servicio warning={true} />
+                <AdminPlan/>
               </ProtectedRoute>
-            }/>
-          <Route path="/login" element={<Landing/>} />
+          }/>
+          <Route path="/" element={<Landing/>} />
+          <Route path="/admin" element={<AdminLanding/>} />
           <Route path="/*" element={<NoPage />} />
-          <Route path="/map" element={<Map/>} />
         </Routes>
       </ResourceDataProvider>
       </UserDataProvider>

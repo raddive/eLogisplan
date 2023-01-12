@@ -29,7 +29,9 @@ export function callWS(type,params,sError)
                 throw new Error("El servicio MySQL no responde");
             else if(res.status >= 400) 
                 throw new Error("El servidor ha respondido con un error");
-                resolve(res.json());
+            else if(res.status === 204) 
+                throw new Error("NO DATA");
+            resolve(res.json());
         })
         .catch((error) => {
             reject(sError = error.message);
