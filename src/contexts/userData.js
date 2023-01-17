@@ -1,6 +1,5 @@
 import React,{useState} from "react"
 import {Navigate } from "react-router-dom";
-import { empresa } from "../variables/webServicesVariables";
 import jwt_decode from "jwt-decode";
 import bcrypt from "bcryptjs"
 import { callWS} from "../components/utils";
@@ -18,7 +17,7 @@ function UserDataProvider(props) {
     const [isAdmin, setIsAdmin] = useState(false);
     function setUser(newUser,curDate)
     {
-        setUserData({ code: newUser.code,name: newUser.name,date:curDate,empresa:empresa});
+        setUserData({ code: newUser.code,name: newUser.name,date:curDate,empresa:process.env.REACT_APP_EMPRESA});
         setIsAdmin(false);
     };
     function setAdmin(name)
@@ -31,7 +30,7 @@ function UserDataProvider(props) {
     function checkUser(userCode)
     {
         let error="";
-        const params = { rquest:"loginJWT",user:userCode,empresa:empresa};
+        const params = { rquest:"loginJWT",user:userCode,empresa:process.env.REACT_APP_EMPRESA};
         callWS("GET",params,error)
         .then(data =>   { 
             if(data)

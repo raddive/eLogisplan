@@ -18,8 +18,6 @@ function App() {
     const userData = useContext(UserContext).userData;
     const adminData = useContext(UserContext).adminData;
     const isAdmin = useContext(UserContext).isAdmin;
-    console.log(adminData);
-    console.log(userData);
     if (userData.name!=="" || adminData.name!=="" ) {
       return children      
     }
@@ -32,7 +30,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="">
       <UserDataProvider>
       <ResourceDataProvider>
         <Routes>

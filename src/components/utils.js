@@ -1,9 +1,8 @@
 import Moment from 'moment';
-import { wsBaseURL,empresa } from "../variables/webServicesVariables";
 
 export function callWS(type,params,sError)
 {
-    let url = new URL(wsBaseURL);
+    let url = new URL(process.env.REACT_APP_WS_BASE_URL);
     let requestOptions = {}
    
     if(type==="GET")
@@ -43,10 +42,10 @@ export function chechUncheckStopPoint(error,setUnset,pedido,particion)
 {
     const formatDate = Moment().format('YYYY-MM-DD')
     let  params;
-    if(setUnset == false)
-        params = { rquest:"confirmaPedido",body:{unset:1,fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:empresa}};
+    if(setUnset === false)
+        params = { rquest:"confirmaPedido",body:{unset:1,fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:process.env.REACT_APP_EMPRESA}};
     else
-        params = { rquest:"confirmaPedido",body:{fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:empresa}};
+        params = { rquest:"confirmaPedido",body:{fecha:formatDate,codigoServicio:pedido, particion:particion, empresa:process.env.REACT_APP_EMPRESA}};
 
     callWS("POST",params,error)
     .then(data =>   { 
@@ -66,10 +65,10 @@ export function chechUncheckLoadPoint(error,setUnset,conductor,tractora,cisterna
 
     const formatDate = Moment().format('YYYY-MM-DD')
     let  params;
-    if(setUnset == false)
-        params = { rquest:"confirmaCarga",body:{unset:1,fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:"Distribucion"}};
+    if(setUnset === false)
+        params = { rquest:"confirmaCarga",body:{unset:1,fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:process.env.REACT_APP_EMPRESA}};
         else
-           params = { rquest:"confirmaCarga",body:{fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:"Distribucion"}};
+           params = { rquest:"confirmaCarga",body:{fecha:formatDate,codigoConductor:conductor,codigoTractora:tractora, codigoCisterna:cisterna, viaje:viaje, empresa:process.env.REACT_APP_EMPRESA}};
 
     callWS("POST",params,error)
     .then(data =>   { 
@@ -87,7 +86,7 @@ export function chechUncheckLoadPoint(error,setUnset,conductor,tractora,cisterna
 export function updateBBDD(error)
 {
     const formatDate = Moment().format('DD-MM-YYYY')
-    const params = { rquest:"actualizaBBDD",body:{fecha:formatDate,empresa:empresa}};
+    const params = { rquest:"actualizaBBDD",body:{fecha:formatDate,empresa:process.env.REACT_APP_EMPRESA}};
     callWS("POST",params,error)
     .then(data =>   { 
         //console.log(data);

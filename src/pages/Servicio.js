@@ -129,7 +129,7 @@ export default function Servicio (props) {
                            body:{fecha: userContext.userData.date, 
                                  codigoServicio:numServicio,
                                  particion:numParticion,
-                                 empresa:"Distribucion",
+                                 empresa:process.env.REACT_APP_EMPRESA,
                                  incidencia:warning}
                         };
          callWS("POST",params,error)

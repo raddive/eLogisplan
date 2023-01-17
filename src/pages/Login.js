@@ -8,7 +8,6 @@ import '../css/pages/Login.css';
 
 import { UserDataConsumer, UserContext } from "../contexts/userData";
 import { callWS,updateBBDD } from "../components/utils";
-import { empresa } from "../variables/webServicesVariables";
 
 export default function Login (props) 
 { 
@@ -41,7 +40,7 @@ function loginClick () {
 
     if(formData.user && formData.password)
     {
-        const params = { rquest:"loginJWT",user:formData.user,empresa:empresa};
+        const params = { rquest:"loginJWT",user:formData.user,empresa:process.env.REACT_APP_EMPRESA};
         callWS("GET",params,error)
         .then(data =>   { 
             if(userContext.checkJWTLogin(data,formData.password))

@@ -52,7 +52,7 @@ export default function AdminPlan (props) {
       {
          const params = {  rquest:"getInfoRecursos",
                            fecha: formatDate, 
-                           empresa:"Distribucion"};
+                           empresa:process.env.REACT_APP_EMPRESA};
          callWS("GET",params,error)
          .then(data =>   { 
                setError("");
@@ -72,7 +72,7 @@ export default function AdminPlan (props) {
          const params = {  rquest:"getViajesRecurso",
                            // fecha: userContext.userData.date, 
                            fecha: formatDate,
-                           empresa:"Distribucion",
+                           empresa:process.env.REACT_APP_EMPRESA,
                            full_info:1,
                            codigoConductor:selRecurso.codConductor,
                            codigoTractora:selRecurso.codTractora,

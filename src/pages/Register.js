@@ -8,7 +8,6 @@ import '../css/pages/Login.css';
 
 import { UserDataConsumer, UserContext } from "../contexts/userData";
 import { callWS,updateBBDD } from "../components/utils";
-import { empresa } from "../variables/webServicesVariables";
 
 export default function Login (props) 
 { 
@@ -46,7 +45,7 @@ function registerClick () {
     {
         //Miro si el usuario ya existe
         let error="";
-        const params = { rquest:"loginJWT",user:formData.code,empresa:empresa};
+        const params = { rquest:"loginJWT",user:formData.code,empresa:process.env.REACT_APP_EMPRESA};
         callWS("GET",params,error)
         .then(data =>   { 
             if(data)
@@ -61,7 +60,7 @@ function registerClick () {
             if(error==="NO DATA")
             {
                 const hash=userContext.registerJWTUser(formData);
-                const params = { rquest:"createUser",body:{code:formData.code,name:formData.name,password:hash,empresa:empresa}};
+                const params = { rquest:"createUser",body:{code:formData.code,name:formData.name,password:hash,empresa:process.env.REACT_APP_EMPRESA}};
                 callWS("POST",params,error)
                 .then(data =>   { 
                     {
