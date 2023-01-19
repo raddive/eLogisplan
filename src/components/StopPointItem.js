@@ -105,8 +105,7 @@ export default function StopPointItem (props) {
                         </Link>
                         </div>
                 <div className="col-12 text-right stopPointContent"> 
-                    <Link to="/servicio"state={{ from: "viaje",numServicio:stopPointInfo.CodigoServicio,numParticion:stopPointInfo.ParticionPedido}}><Image className='stopPoint_bt' src={img_bt_info} alt="InfoButton" /></Link>
-                    <Link to="/warning" state={{ from: "viaje",numServicio:stopPointInfo.CodigoServicio,numParticion:stopPointInfo.ParticionPedido}}><Image className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" /></Link>
+                    <Link to="/servicio" state={{ from: "viaje",numServicio:stopPointInfo.CodigoServicio,numParticion:stopPointInfo.ParticionPedido}}><Image className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" /></Link>
                     <a href={"https://maps.google.com/?q="+stopPointInfo.Descarga_Coord_Latitude+","+stopPointInfo.Descarga_Coord_Longitude} target="_blank"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
                     
                 </div>

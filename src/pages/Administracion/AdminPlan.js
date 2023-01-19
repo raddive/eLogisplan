@@ -1,17 +1,17 @@
 import React, { useEffect,useState } from 'react';
 import {Link, Navigate } from "react-router-dom";
-import { UserDataConsumer,UserContext } from "../contexts/userData";
-import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
+import { UserDataConsumer,UserContext } from "../../contexts/userData";
+import { ResourceDataConsumer,ResourceContext } from "../../contexts/resourceData";
 import Moment from 'moment';
 
 
-import AdminHeader from "../components/AdminHeader";
-import AdminTablaRecursos from '../components/AdminTablaRecursos';
-import AdminTablaViajes from '../components/AdminTablaViajes';
-import Servicio from './Servicio';
+import AdminHeader from "../../components/AdminHeader";
+import AdminTablaRecursos from '../../components/AdminTablaRecursos';
+import AdminTablaViajes from '../../components/AdminTablaViajes';
+import Servicio from '../Usuario/Servicio';
 
 
-import { callWS } from "../components/utils";
+import { callWS } from "../../components/utils";
 
 export default function AdminPlan (props) { 
 

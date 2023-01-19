@@ -6,8 +6,8 @@ import { Password } from 'primereact/password';
 
 import '../css/pages/Login.css';
 
-import { UserDataConsumer, UserContext } from "../contexts/userData";
-import { callWS,updateBBDD } from "../components/utils";
+import { UserDataConsumer, UserContext } from "../../contexts/userData";
+import { callWS,updateBBDD } from "../../components/utils";
 
 export default function Login (props) 
 { 

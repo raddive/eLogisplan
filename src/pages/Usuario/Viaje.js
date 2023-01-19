@@ -1,14 +1,14 @@
 import React, { useEffect,useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import { UserDataConsumer,UserContext } from "../contexts/userData";
-import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
-import PagesHeader from '../components/PagesHeader';
-import PagesTopBar from '../components/PagesTopBar';
+import { UserDataConsumer,UserContext } from "../../contexts/userData";
+import { ResourceDataConsumer,ResourceContext } from "../../contexts/resourceData";
+import PagesHeader from '../../components/PagesHeader';
+import PagesTopBar from '../../components/PagesTopBar';
 
-import { callWS } from "../components/utils";
-import StopPointItem from '../components/StopPointItem';
-import LoadPointItem from '../components/LoadPointItem';
-import MyMapContainer from '../components/MyMapContainer';
+import { callWS } from "../../components/utils";
+import StopPointItem from '../../components/StopPointItem';
+import LoadPointItem from '../../components/LoadPointItem';
+import MyMapContainer from '../../components/MyMapContainer';
 
 export default function Viaje (props) { 
  const location = useLocation();

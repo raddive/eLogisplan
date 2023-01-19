@@ -1,11 +1,10 @@
 import React from "react";
 import { Image } from 'primereact/image';
 
-import Login from "../pages/Login";
-import PagesTopBar from '../components/PagesTopBar';
+import Login from "pages/Usuario/Login";
+import PagesTopBar from 'components/PagesTopBar';
 
-import img_customer from "../images/logoCustomer.png"
-import img_LogoeLogisplan from "../images/logoeLogisplan.png"
+import img_LogoeLogisplan from "images/logoeLogisplan.png"
 
 export default function Landing () 
 { 

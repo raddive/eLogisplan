@@ -1,13 +1,14 @@
 import React from "react";
 import { Link} from 'react-router-dom'
+import { Image } from 'primereact/image';
 
 import '../css/components/Header.css';
-import { Image } from 'primereact/image';
 
 import img_customer from "../images/logoCustomer.png"
 import img_eLogisplan from "../images/logoeLogisplan.png"
 import img_evolution from "../images/logoEvolution.png"
-import AdminMenu from "../pages/AdminMenu";
+
+import AdminMenu from "../pages/Administracion/AdminMenu";
 
 
 export default function AdminHeader (props) 

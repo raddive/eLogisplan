@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Image } from 'primereact/image';
-import {Navigate, useResolvedPath } from "react-router-dom";
+import {Navigate } from "react-router-dom";
 import Moment from 'moment';
-
 import { Password } from 'primereact/password';
 
-import '../css/pages/Login.css';
+import 'css/pages/Login.css';
 
-import img_LogoeLogisplan from "../images/logoeLogisplan.png";
-import img_LightDark_Light from "../images/img_bt_light_dark.png";
-import img_LightDark_Dark from "../images/img_bt_light_dark_white.png";
+import img_LogoeLogisplan from "images/logoeLogisplan.png";
+import img_LightDark_Light from "images/img_bt_light_dark.png";
+import img_LightDark_Dark from "images/img_bt_light_dark_white.png";
 
-import { UserDataConsumer, UserContext } from "../contexts/userData";
-import { callWS,updateBBDD } from "../components/utils";
+import { UserDataConsumer, UserContext } from "contexts/userData";
+import { callWS,updateBBDD } from "components/utils";
 
 export default function Login (props) 
 { 
@@ -31,6 +30,8 @@ export default function Login (props)
 
     useEffect(() => {
         changeTheme();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [bDark,localStorage.getItem("eLogisplan-DarkMode")])
 
     function handleChange(event) { 

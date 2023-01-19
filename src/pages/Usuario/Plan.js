@@ -1,19 +1,16 @@
 import React, { useEffect,useState } from 'react';
-import { UserDataConsumer,UserContext } from "../contexts/userData";
-import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
 import { Image } from 'primereact/image';
-import { Button } from 'primereact/button';
 
+import { UserDataConsumer,UserContext } from "contexts/userData";
+import { ResourceDataConsumer,ResourceContext } from "contexts/resourceData";
 
-import img_LogoeLogisplan from "../images/logoeLogisplan.png"
-import img_logoEvolution from "../images/logoEvolution.png"
-import img_logoLogisplan from "../images/logoLogisplan.png"
+import img_LogoeLogisplan from "images/logoeLogisplan.png"
 
-import ViajeItem from '../components/ViajeItem';
-import PagesHeader from '../components/PagesHeader';
-import PagesTopBar from '../components/PagesTopBar';
+import ViajeItem from 'components/ViajeItem';
+import PagesHeader from 'components/PagesHeader';
+import PagesTopBar from 'components/PagesTopBar';
 
-import { callWS } from "../components/utils";
+import { callWS } from "components/utils";
 
 export default function Plan (props) { 
 
@@ -27,6 +24,8 @@ export default function Plan (props) {
     //utilizamoa useEffect,[] porque solo se llama una vez
    useEffect( () => {
       getInfoRecurso();
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     useEffect( () => {
@@ -35,7 +34,7 @@ export default function Plan (props) {
          getViajesRecurso();
       }
 
-      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[resourceContext.resourceData]);
 
    

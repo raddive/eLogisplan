@@ -1,25 +1,26 @@
 import React, { useEffect,useState,useRef } from 'react';
-import { Link, useLocation,useNavigate } from 'react-router-dom'
-import { UserDataConsumer,UserContext } from "../contexts/userData";
-import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
-import PagesHeader from '../components/PagesHeader';
-import PagesTopBar from '../components/PagesTopBar';
+import { useLocation } from 'react-router-dom'
 import { Image } from 'primereact/image';
-import { callWS, HHMM_to_String,chechUncheckStopPoint } from "../components/utils";
-import MyMapContainer from '../components/MyMapContainer';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { InputTextarea } from 'primereact/inputtextarea';
 
-import img_bt_uncheck from "../images/img_bt_uncheck.png"
-import img_bt_check from "../images/img_bt_check.png"
-import img_bt_info from "../images/img_bt_info.png"
-import img_bt_warning from "../images/img_bt_warning.png"
-import img_bt_map from "../images/img_bt_map.png"
+import { UserDataConsumer,UserContext } from "contexts/userData";
+import { ResourceDataConsumer } from "contexts/resourceData";
+
+import PagesHeader from 'components/PagesHeader';
+import PagesTopBar from 'components/PagesTopBar';
+import MyMapContainer from 'components/MyMapContainer';
+
+import { callWS, HHMM_to_String,chechUncheckStopPoint } from "components/utils";
+
+import img_bt_uncheck from "images/img_bt_uncheck.png"
+import img_bt_check from "images/img_bt_check.png"
+import img_bt_warning from "images/img_bt_warning.png"
+import img_bt_map from "images/img_bt_map.png"
 
 export default function Servicio (props) { 
    const location = useLocation();
-   const navigate = useNavigate();
 
    let numServicio,numParticion;
    if(location.state){
@@ -46,6 +47,7 @@ export default function Servicio (props) {
    useEffect( () => {
        getInfoServicio();
        
+       // eslint-disable-next-line react-hooks/exhaustive-deps
    },[]);
 
 
@@ -57,6 +59,8 @@ export default function Servicio (props) {
    useEffect(() => {
        setCheckedImage(checked?img_bt_check:img_bt_uncheck);
        getInfoServicio();
+
+       // eslint-disable-next-line react-hooks/exhaustive-deps
    },[checked,viewWarning]);
 
 
@@ -194,7 +198,7 @@ export default function Servicio (props) {
                               <div className="col-7 text-right"> 
                               {/* <Link to="/warning" state={{ from: "viaje",Servicio:infoServicio,numServicio:numServicio,numParticion:numParticion}}><Image className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" /></Link> */}
                               <Image onClick={onViewWarning} className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" />
-                              <a href={"https://maps.google.com/?q="+infoServicio.Descarga_Coord_Latitude+","+infoServicio.Descarga_Coord_Longitude} target="_blank"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
+                              <a href={"https://maps.google.com/?q="+infoServicio.Descarga_Coord_Latitude+","+infoServicio.Descarga_Coord_Longitude} target="_blank" rel="noreferrer"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
                               </div>
                               <span className='col-12 surface-100'>
                                  <span>#Servicio : {numServicio} ({numParticion})</span><br/>

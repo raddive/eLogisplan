@@ -1,9 +1,10 @@
 import React from "react";
 import { Image } from 'primereact/image';
-import img_Landing from "../images/img_Landing.png"
 
+import img_Landing from "images/img_Landing.png"
 
-import Header from "../components/Header";
+import Header from "components/Header";
+
 import AdminLogin from "./AdminLogin";
 
 export default function AdminLanding () 

@@ -1,9 +1,10 @@
 import React,{useState} from "react"
-import {Navigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import bcrypt from "bcryptjs"
+
 import { callWS} from "../components/utils";
-import AdminLanding from "../pages/AdminLanding";
+
+// import AdminLanding from "../pages/Administracion/AdminLanding";
 
 
 const {Consumer} = React.createContext()

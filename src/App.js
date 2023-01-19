@@ -4,13 +4,14 @@ import { UserDataProvider,UserDataConsumer,UserContext} from "./contexts/userDat
 import { ResourceDataProvider,ResourceDataConsumer,ResourceContext} from "./contexts/resourceData";
 
 import Landing from './pages/Landing';
-import Plan from './pages/Plan';
-import Viaje from './pages/Viaje';
-import Servicio from './pages/Servicio';
 import NoPage from './pages/NoPage';
-import Map from './pages/Map';
-import AdminLanding from './pages/AdminLanding';
-import AdminPlan from './pages/AdminPlan';
+
+import Plan from './pages/Usuario/Plan';
+import Viaje from './pages/Usuario/Viaje';
+import Servicio from './pages/Usuario/Servicio';
+
+import AdminLanding from './pages/Administracion/AdminLanding';
+import AdminPlan from './pages/Administracion/AdminPlan';
 
 function App() {
   
