@@ -3,6 +3,7 @@ import { Link, useLocation,useNavigate } from 'react-router-dom'
 import { UserDataConsumer,UserContext } from "../contexts/userData";
 import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
 import PagesHeader from '../components/PagesHeader';
+import PagesTopBar from '../components/PagesTopBar';
 import { Image } from 'primereact/image';
 import { callWS, HHMM_to_String,chechUncheckStopPoint } from "../components/utils";
 import MyMapContainer from '../components/MyMapContainer';
@@ -155,8 +156,12 @@ export default function Servicio (props) {
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen ml-0">
-                  <div className="col-5 col-offset-1 hidden max-h-screen lg:flex">
+               <div className="grid max-w-screen  h-screen ml-0">
+                  <div className="col-5 col-offset-1 hidden my-auto mx-auto lg:flex lg:flex-column">
+                     <PagesTopBar
+                        left={true}
+                        logOut={userContext.logOut}
+                     />
                      {infoServicio  && (
                         <MyMapContainer 
                            basePoint ={null}
@@ -165,8 +170,13 @@ export default function Servicio (props) {
                            markerList = {null}/>
                         )}
                   </div>
-                  <div className="col-12 lg:col-5 lg:col-offset-0">
-                     <div className='m-5 bg-white h-full text-left'>
+                  <div className="col-12 lg:col-6 flex flex-column bg-orange-100 flex align-content-center justify-content-top h-screen overflow-hidden">
+                     <PagesTopBar
+                        right={true}
+                        showBack={true}
+                        logOut={userContext.logOut}
+                     />
+                     <div className="card surface-50 shadow-5 lg:h-auto sm:h-screen px-3 py-5 lg:mx-5 overflow-auto text-left">
                         <PagesHeader
                            logOut={userContext.logOut}
                            infoUser={null}
@@ -177,7 +187,7 @@ export default function Servicio (props) {
                            <span className='stopPointList grid p-3 m-3 '>
                               <div className="col-5 text-left flex align-items-center"> 
                                  <Toast ref={toastBC} position="top-center" />
-                                 <Image onClick={showConfirm} className='stopPoint_bt' src={checkedImage} alt="LogoEvolution" />
+                                 <Image onClick={showConfirm} className='stopPoint_bt' src={checkedImage} alt="confirm" />
                                  {checked===true && infoServicio.HoraRealDestino!=="" && (<span className={textColor}>{HHMM_to_String(infoServicio.HoraRealDestino)}</span>)}
                               </div>
 
@@ -186,7 +196,7 @@ export default function Servicio (props) {
                               <Image onClick={onViewWarning} className='stopPoint_bt' src={img_bt_warning} alt="WarningButton" />
                               <a href={"https://maps.google.com/?q="+infoServicio.Descarga_Coord_Latitude+","+infoServicio.Descarga_Coord_Longitude} target="_blank"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
                               </div>
-                              <span className='col-12 bg-orange-100'>
+                              <span className='col-12 surface-100'>
                                  <span>#Servicio : {numServicio} ({numParticion})</span><br/>
                                  <span>{infoServicio.NombreDestino}</span><br/>
                                  <span className='text-base'>{infoServicio.CPDestino},{infoServicio.CiudadDestino},</span><br/><br/>
@@ -209,8 +219,8 @@ export default function Servicio (props) {
                                        <span className='text-base'>Nueva incidencia</span><br/>
                                        <InputTextarea rows={7} cols={55} onChange={(e) => setWarning(e.target.value)} ></InputTextarea>
                                        <button type="button" onClick={addWarning}
-                                       className="small col-offset-8 col-4 text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer 
-                                       transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 
+                                       className="small col-offset-8 col-4 text-white bg-orange-400 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer 
+                                       transition-all transition-duration-200 hover:bg-orange-500 hover:border-primary-600 
                                        active:bg-primary-700 active:border-primary-700">ACEPTAR</button>
                                     </>
                                  )}

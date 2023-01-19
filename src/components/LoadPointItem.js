@@ -96,7 +96,7 @@ export default function LoadPointItem (props) {
 
                             </span>
                         </div>
-                <div className="col-12 text-right stopPointContent"> 
+                <div className="col-12 text-right"> 
                     {loadPointInfo.Carga_Coord_Latitude && loadPointInfo.Carga_Coord_Longitude && (
                         <a href={"https://maps.google.com/?q="+loadPointInfo.Carga_Coord_Latitude+","+loadPointInfo.Carga_Coord_Longitude} target="_blank"><Image className='stopPoint_bt' src={img_bt_map} alt="MapButton" /></a>
                     )}

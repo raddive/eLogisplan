@@ -1,20 +1,24 @@
 import React from "react";
 import { Image } from 'primereact/image';
-import img_Landing from "../images/img_Landing.png"
 
-import Header from "../components/Header";
 import Login from "../pages/Login";
+import PagesTopBar from '../components/PagesTopBar';
+
+import img_customer from "../images/logoCustomer.png"
+import img_LogoeLogisplan from "../images/logoeLogisplan.png"
 
 export default function Landing () 
 { 
     return (
-        <div className="grid max-w-screen ml-0">
-            <div className="col-5 col-offset-1 hidden max-h-screen lg:flex">
-                <Image className="flex align-content-start justify-content-center flex-wrap p-5" imageStyle={{width:"100%", height:"auto"}} src={img_Landing} alt="CityNight" />
+        <div className="grid max-w-screen h-screen  ml-0 ">
+            <div className="col-6 hidden my-auto lg:flex lg:flex-column">
+                <PagesTopBar
+                        left={true}
+                />
+                <Image className="" src={img_LogoeLogisplan} imageStyle={{width:"60%", height:"auto"}}  alt="eLogisplanLogo" />
             </div>
-            <div className="col-11 col-offset-1 m-5 lg:col-5 lg:col-offset-0">
-                <Header />
-                <Login />
+            <div className="col-12 lg:col-6 flex flex-column bg-orange-100 flex align-content-center justify-content-top lg:justify-content-center">
+                    <Login />
             </div>
         </div>
     );

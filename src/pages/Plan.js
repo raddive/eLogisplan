@@ -2,12 +2,16 @@ import React, { useEffect,useState } from 'react';
 import { UserDataConsumer,UserContext } from "../contexts/userData";
 import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
 import { Image } from 'primereact/image';
-import img_Landing from "../images/img_Landing.png"
+import { Button } from 'primereact/button';
 
 
+import img_LogoeLogisplan from "../images/logoeLogisplan.png"
+import img_logoEvolution from "../images/logoEvolution.png"
+import img_logoLogisplan from "../images/logoLogisplan.png"
 
 import ViajeItem from '../components/ViajeItem';
 import PagesHeader from '../components/PagesHeader';
+import PagesTopBar from '../components/PagesTopBar';
 
 import { callWS } from "../components/utils";
 
@@ -95,21 +99,29 @@ export default function Plan (props) {
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen ml-0 ">
-                  <div className="col-5 col-offset-1 hidden lg:flex">
-                     <Image className="flex align-content-start justify-content-center flex-wrap p-5" imageStyle={{width:"100%", height:"auto"}} src={img_Landing} alt="CityNight" />
+               <div className="grid max-w-screen h-screen  ml-0 ">
+                  <div className="col-6 hidden my-auto lg:flex lg:flex-column">
+                     <PagesTopBar
+                        left={true}
+                        logOut={userContext.logOut}
+                     />
+                     <Image className="" src={img_LogoeLogisplan} imageStyle={{width:"60%", height:"auto"}}  alt="eLogisplanLogo" />
                   </div>
-                  <div className="col-12 lg:col-5 lg:col-offset-0">
-                     <div className='m-5 bg-white max-h-screen pb-3'>
-                        {viajesRecurso[0] && (
-                           <PagesHeader
-                              logOut={userContext.logOut}
-                              infoUser={userContext.userData}
-                              infoResource={resourceContext.resourceData}
-                              />
-                        )}
-                        <p className="text-3xl text-red-500">{error}</p>
-                        {listaViajes}
+                  <div className="col-12 lg:col-6 flex flex-column bg-orange-100 flex align-content-center justify-content-top">
+                     <PagesTopBar
+                        right={true}
+                        showBack={false}
+                        logOut={userContext.logOut}
+                     />
+                     <div className="card surface-50 shadow-5 lg:h-auto sm:h-screen px-3 py-5 lg:mx-5 ">
+                           {viajesRecurso[0] && (
+                              <PagesHeader
+                                 infoUser={userContext.userData}
+                                 infoResource={resourceContext.resourceData}
+                                 />
+                           )}
+                           <p className="text-3xl text-red-500">{error}</p>
+                           {listaViajes}
                      </div>
                   </div>
                </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from 'primereact/image';
-import 'primereact/resources/themes/saga-orange/theme.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';

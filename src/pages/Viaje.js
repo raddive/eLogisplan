@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { UserDataConsumer,UserContext } from "../contexts/userData";
 import { ResourceDataConsumer,ResourceContext } from "../contexts/resourceData";
 import PagesHeader from '../components/PagesHeader';
+import PagesTopBar from '../components/PagesTopBar';
+
 import { callWS } from "../components/utils";
 import StopPointItem from '../components/StopPointItem';
 import LoadPointItem from '../components/LoadPointItem';
@@ -84,8 +86,12 @@ export default function Viaje (props) {
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid max-w-screen ml-0">
-                  <div className="col-5 col-offset-1 hidden  lg:flex">
+               <div className="grid max-w-screen h-screen  ml-0 ">
+                  <div className="col-5 col-offset-1 hidden my-auto mx-auto lg:flex lg:flex-column">
+                     <PagesTopBar
+                        left={true}
+                        logOut={userContext.logOut}
+                     />
                      {Array.isArray(coordList) && coordList.length!==0 &&
                      (
                         <MyMapContainer 
@@ -94,18 +100,21 @@ export default function Viaje (props) {
                            loadPoint = {loadPointInfo}/>
                      )}
                   </div>
-                  <div className="col-12
-                           lg:col-5 lg:col-offset-0">
-                     <div className='m-5 bg-white h-full text-left pb-3'>
+                  <div className="col-12 lg:col-6 flex flex-column bg-orange-100 flex align-content-center justify-content-top h-screen overflow-hidden">
+                     <PagesTopBar   
+                        right={true}
+                        showBack={true}
+                        logOut={userContext.logOut}
+                     />
+                     <div className="card surface-50 shadow-5 lg:h-auto sm:h-screen px-3 py-5 lg:mx-5 text-left overflow-auto">
                         {stopPoints[0] && (
                            <PagesHeader
-                              logOut={userContext.logOut}
                               infoUser={userContext.userData}
                               infoResource={resourceContext.resourceData}
                            />
                         )}
                         <p className="text-3xl text-red-500">{error}</p>
-                        <span className='p-3'>Viaje: {numViaje}</span>
+                        <span className='p-3 text-left'>Viaje: {numViaje}</span>
                         {loadPointInfo && (
                            <div className='stopPointList'>
                               <LoadPointItem 

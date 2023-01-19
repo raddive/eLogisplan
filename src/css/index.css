@@ -4,8 +4,8 @@ html, body {height: 100%}
   
 body {
     text-align: center;
-    color: RGB(100,100,100);
-    background-color: RGB(255,230,170);
+    color: var(--surface-700);
+    background-color: var(--surface-0);
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen'; 
     font-size: 1.5rem;
@@ -26,11 +26,11 @@ code {
 }
 
 .stopPointList{
-  border: 1pt solid black;
+  border: 1pt solid var(--surface-900);
   margin: 1rem;
 }
 .stopPointContent{
-  border-bottom: solid 1pt orange;
+  border-bottom: solid 1pt var(--orange-400);
 }
 
 
@@ -45,8 +45,8 @@ code {
 }
 
 .productsList{
-  border-top: 1pt solid black;
-  border-bottom: 1pt solid black;
+  border-top: 1pt solid var(--surface-900);
+  border-bottom: 1pt solid var(--surface-900);
   margin: 1rem;
 }
 

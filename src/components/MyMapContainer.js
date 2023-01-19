@@ -98,7 +98,7 @@ export default function MyMapContainer(props) {
     <>
     
     <MapContainer
-        style={{width:"90vh", height:"90vh"}}
+        style={{width:"90%", height:"70vh"}}
         className="m-3"
         center={[42.366, -3.648]}
         zoom={customerPoint?12:8}
