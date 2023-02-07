@@ -12,6 +12,7 @@ import Servicio from './pages/Usuario/Servicio';
 
 import AdminLanding from './pages/Administracion/AdminLanding';
 import AdminPlan from './pages/Administracion/AdminPlan';
+import AdminMap from 'pages/Administracion/AdminMap';
 
 function App() {
   
@@ -19,6 +20,9 @@ function App() {
     const userData = useContext(UserContext).userData;
     const adminData = useContext(UserContext).adminData;
     const isAdmin = useContext(UserContext).isAdmin;
+
+    console.log("usuario: " + userData.name);
+    console.log("administrador " + adminData.name);
     if (userData.name!=="" || adminData.name!=="" ) {
       return children      
     }
@@ -64,8 +68,14 @@ function App() {
                 <AdminPlan/>
               </ProtectedRoute>
           }/>
-          <Route path="/" element={<Landing/>} />
+          <Route path="/adminMap" element={
+              <ProtectedRoute>
+                <AdminMap/>
+              </ProtectedRoute>
+            }/>
+            <Route path="/" element={<Landing/>} />
           <Route path="/admin" element={<AdminLanding/>} />
+          <Route path="/adminMap2" element={<AdminMap/>} />
           <Route path="/*" element={<NoPage />} />
         </Routes>
       </ResourceDataProvider>

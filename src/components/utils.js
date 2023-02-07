@@ -107,3 +107,17 @@ export function HHMM_to_String(HHMM)
 
     return hh+":"+mm;
 }
+
+export function changeTheme(bDark){
+    if(bDark===true || bDark===false)  
+    {
+        localStorage.setItem("eLogisplan-DarkMode", bDark);
+        let themeLink = document.getElementById('theme-link');
+        if (themeLink) {
+            if(bDark===false)
+                themeLink.href = "themes/orange-light.css";
+            else
+                themeLink.href = "themes/orange-dark.css";
+        }
+    }
+}

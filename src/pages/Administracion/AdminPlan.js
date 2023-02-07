@@ -94,6 +94,10 @@ export default function AdminPlan (props) {
       console.log("logout desde plan");
       return <Navigate to='/admin' />
     }
+    function planClick() {
+      console.log("hols");
+      return <Navigate to='/adminPlan' />
+  }
     
    
  return (
@@ -101,31 +105,26 @@ export default function AdminPlan (props) {
       {user => (
          <ResourceDataConsumer>
             {resource => (
-               <div className="grid mx-3 ">
-                  <div className="col-12">
-                     <AdminHeader 
-                        logOut={userContext.adminLogOut}/>
+               <div className="grid max-w-screen h-screen m-0 bg-orange-100 ">
+                  <AdminHeader 
+                     logOut={userContext.adminLogOut}
+                  />
+                  <div className="col ml-3 surface-50" style={{height:"80%"}}>
+                     <AdminTablaRecursos
+                        date={formatDate}
+                        data={infoRecursos}
+                        selRecurso={setSelRecurso}
+                        setPanelDerecho
+                     />
                   </div>
-                  <div className="col-6">
-                     <div className='mx-5 bg-white pb-3'>
-                        <AdminTablaRecursos
-                           date={formatDate}
-                           data={infoRecursos}
-                           selRecurso={setSelRecurso}
-                           setPanelDerecho
-                        />
-                     </div>
-                  </div>
-                  <div className="col-6">
+                  <div className="col mx-3 surface-50" style={{height:"80%"}}>
                      {panelDerecho ===0 && selRecurso.codConductor && (
-                     <div className='m-5 bg-white pb-3'>
-                     <AdminTablaViajes
+                        <AdminTablaViajes
                               date={formatDate}
                               data={detalleRecurso}
                               selServicio={setSelServicio}
                               setPanelDerecho
                            />
-                     </div>
                      )}
                      {panelDerecho ===1 && selServicio.codPedido && (
                         <div className='m-5 bg-white pb-3'>

@@ -84,6 +84,7 @@ function UserDataProvider(props) {
     function adminLogOut()
     {
         setAdminData({name:""})
+        setIsAdmin(false);
     }
     
     // return (

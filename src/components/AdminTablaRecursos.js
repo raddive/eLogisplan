@@ -32,7 +32,7 @@ export default function AdminTablaRecursos (props) {
     const vehicleTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.CodigoConductor} src={tripImg} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="80" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.CodigoConductor} src={tripImg} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="40" style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{rowData.CodigoConductor}</span>
             </React.Fragment>
         );
@@ -40,21 +40,21 @@ export default function AdminTablaRecursos (props) {
     const trabajoTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span>{rowData.TiempoTrabajo_Pintar}</span> {rowData.TiempoExtraTrabajo_Pintar && (<span className='text-red-500'>({rowData.TiempoExtraTrabajo_Pintar})</span>)}         
+                <span>{rowData.TiempoTrabajo_Pintar}</span> {rowData.TiempoExtraTrabajo_Pintar && (<span className='text-red-500'>&nbsp;({rowData.TiempoExtraTrabajo_Pintar})</span>)}         
             </React.Fragment>
         );
     }
     const conduccionTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span>{rowData.TiempoConduccion_Pintar}</span> {rowData.TiempoExtraConduccion_Pintar && (<span className='text-red-500'>({rowData.TiempoExtraConduccion_Pintar})</span>)}         
+                <span>{rowData.TiempoConduccion_Pintar}</span> {rowData.TiempoExtraConduccion_Pintar && (<span className='text-red-500'>&nbsp;({rowData.TiempoExtraConduccion_Pintar})</span>)}         
             </React.Fragment>
         );
     }
     const retrasoTemplate = (rowData) => {
         return (
             <React.Fragment>
-                {rowData.TiempoRetraso_Pintar && (<span className='text-red-500'>{rowData.TiempoRetraso_Pintar}</span>)}         
+                {rowData.TiempoRetraso_Pintar && rowData.TiempoRetraso_Pintar!=="00:00" && (<span className='text-red-500'>{rowData.TiempoRetraso_Pintar}</span>)}         
             </React.Fragment>
         );
     }
@@ -62,8 +62,8 @@ export default function AdminTablaRecursos (props) {
     const statusTemplate = (rowData) => {
         return (
             <React.Fragment>
-                {rowData.TiempoRetraso_Pintar && (<img alt="retraso" src={img_error_time} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="50" style={{ verticalAlign: 'middle' }}/>)}
-                {rowData.Incidencias && (<img alt="warning" src={img_warning} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="50" style={{ verticalAlign: 'middle' }} />)}
+                {rowData.TiempoRetraso_Pintar && rowData.TiempoRetraso_Pintar!=="00:00" && (<img alt="retraso" src={img_error_time} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="40" style={{ verticalAlign: 'middle' }}/>)}
+                {rowData.Incidencias && rowData.Incidencias!=="" &&  (<img alt="warning" src={img_warning} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="40" style={{ verticalAlign: 'middle' }} />)}
             </React.Fragment>
         );
     }
@@ -74,15 +74,15 @@ export default function AdminTablaRecursos (props) {
         <>
             <Toast ref={toast}></Toast>
 
-            <div className="card">
+            <div className="card" style={{height:"85%"}}>
                 <h5>Planificación {props.date}</h5>
                 {/* <DataTable value={trips} rowGroupMode="subheader" groupRowsBy="CodigoConductor"
                     sortMode="single" sortField="CodigoConductor" sortOrder={1} scrollable scrollHeight="400px"
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} responsiveLayout="scroll"> */}
-                <DataTable value={trips} responsiveLayout="scroll" size="large" className='text-xl'
+                <DataTable value={trips} scrollable scrollHeight="flex" responsiveLayout="scroll" size="large" className='text-base lg:text-xs'
                     selectionMode="single" selection={selectedResource} onSelectionChange={e => setSelectedResource(e.value)}>
-                    <Column body={vehicleTemplate} header="Conductor"  className="col-2"></Column>
-                    <Column field="CodigoTractora" header="Vehículo" className="col-2"></Column>
+                    <Column body={vehicleTemplate} header="Conductor"  className="col-2 sm:hidden lg:block"></Column>
+                    <Column field="CodigoTractora" header="Vehículo" className="col-2 sm:col-1"></Column>
                     <Column body={trabajoTemplate} header="T. Trabajo"  className="col-2"></Column>
                     <Column body={conduccionTemplate} header="T. Conducción"  className="col-2"></Column>
                     <Column body={retrasoTemplate} header="Retraso" className="col-2"></Column>
